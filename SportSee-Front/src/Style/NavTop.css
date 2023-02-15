@@ -1,0 +1,31 @@
+.nav-top {
+	background-color: #020203;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	position: absolute;
+	width: 100%;
+}
+.nav-top img {
+	width: 178px;
+	height: auto;
+}
+.nav-items {
+	list-style: none;
+	display: flex;
+}
+.nav-items li {
+	color: #fff;
+	font-size: 24px;
+	font-weight: 500;
+	margin-right: 150px;
+	transition: 1s;
+	cursor: pointer;
+}
+.nav-items a {
+	text-decoration: none;
+}
+.nav-items li:hover {
+	color: #ff0101;
+}

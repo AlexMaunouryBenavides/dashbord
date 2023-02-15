@@ -1,0 +1,40 @@
+.login-container {
+	width: 500px;
+	margin: auto;
+	text-align: center;
+}
+.login-container h2 {
+	font-size: 34px;
+	color: #000000;
+	margin: 20px 0;
+}
+.login-container p {
+	color: #ff0101;
+	font-size: 24px;
+	font-weight: 700;
+}
+.users-list {
+	list-style: none;
+	margin: 20px 0;
+}
+.users-list li {
+	margin: 10px auto;
+	padding: 5px;
+	font-size: 18px;
+	border: 1px solid #ff0101;
+	border-radius: 30px;
+	color: #ff0101;
+	max-width: 150px;
+	font-weight: 700;
+	transition: 0.5s;
+	box-shadow: 10px 5px 5px #ff0101;
+}
+.users-list li:hover {
+	transform: scaleX(1.1);
+}
+.users-list li a {
+	text-decoration: none;
+}
+.users-list li a:visited {
+	color: #ff0101;
+}

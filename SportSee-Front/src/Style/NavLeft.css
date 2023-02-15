@@ -1,0 +1,23 @@
+.nav-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	background: #020203;
+	padding: 0 10px;
+	height: 652px;
+}
+.nav-img {
+	margin-top: 100px;
+}
+.nav-img img {
+	margin-top: 10px;
+}
+.nav-left p {
+	color: #fff;
+	writing-mode: vertical-rl;
+	rotate: 180deg;
+	margin-top: 50px;
+	font-size: 12px;
+	font-weight: 500;
+}

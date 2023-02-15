@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: User.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: User.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Navigate } from "react-router-dom";
+import NavTop from "../Components/NavTop";
+import NavLeft from "../Components/NavLeft";
+import "../Style/User.css";
+import Activity from "../Components/ActivityChart";
+import AverageSessions from "../Components/AverageSessionsChart";
+import PerfChart from "../Components/PerfChart";
+import ScoreChart from "../Components/ScoreChart";
+import { useParams } from "react-router-dom";
+import useFetch from "../utils/fetchData";
+import Calorie from "../Assets/energy.svg";
+import Proteine from "../Assets/chicken.svg";
+import Glucide from "../Assets/apple.svg";
+import Lipide from "../Assets/cheeseburger.svg";
+import {
+   USER_MAIN_DATA,
+   USER_ACTIVITY,
+   USER_AVERAGE_SESSIONS,
+   USER_PERFORMANCE,
+} from "../datas/dataMock";
+
+/**
+ * Get datas equal to ID from mock
+ * @returns number of the user id
+ */
+const filterUser = (userId, arrayToFind) => {
+   return arrayToFind.find((user) => {
+      return Number(userId) === user.userId;
+   });
+};
+
+function User() {
+   const { userId } = useParams();
+
+   /**
+    *   Current user data from mock
+    */
+   const currentUserData = USER_MAIN_DATA.find((userData) => userData.id.toString() === userId);
+   const name = currentUserData?.userInfos.firstName;
+   const calorie = currentUserData?.keyData.calorieCount;
+   const proteine = currentUserData?.keyData.proteinCount;
+   const glucide = currentUserData?.keyData.carbohydrateCount;
+   const lipide = currentUserData?.keyData.lipidCount;
+
+   /**
+    * Variables of datas from mock to create charts
+    */
+   const currentUserActivity = filterUser(userId, USER_ACTIVITY);
+   const currentUserAverageSessions = filterUser(userId, USER_AVERAGE_SESSIONS);
+   const currentUserPerf = filterUser(userId, USER_PERFORMANCE);
+
+   /**
+    * Variables of datas from API to create charts
+    */
+
+   /**
+    * User data
+    */
+   const {
+      data: InfoUser,
+      loading: InfoLoading,
+      error: InfoError,
+   } = useFetch(`http://localhost:3000/user/${userId}`);
+   const apiName = InfoUser?.data?.userInfos?.firstName;
+   const apiCalorie = InfoUser?.data?.keyData.calorieCount;
+   const apiProteine = InfoUser?.data?.keyData.proteinCount;
+   const apiGlucide = InfoUser?.data?.keyData.carbohydrateCount;
+   const apiLipide = InfoUser?.data?.keyData.lipidCount;
+
+   /**
+    * Activity data
+    */
+   const {
+      data: user,
+      loading: userLoading,
+      error: userError,
+   } = useFetch(`http://localhost:3000/user/${userId}`);
+   const {
+      data: userActivity,
+      loading: activityLoading,
+      error: activityError,
+   } = useFetch(`http://localhost:3000/user/${userId}/activity`);
+   const activityApi = userActivity?.data;
+
+   /**
+    * Average sessions data
+    */
+
+   const {
+      data: AverageSessionsData,
+      loading: averageSessionsLoading,
+      error: averageSessionsError,
+   } = useFetch(`http://localhost:3000/user/${userId}/average-sessions`);
+   const averageApi = AverageSessionsData?.data;
+
+   /**
+    * Performance data
+    */
+
+   const {
+      data: perfData,
+      loading: perfLoading,
+      error: perfError,
+   } = useFetch(`http://localhost:3000/user/${userId}/performance`);
+   const perfApi = perfData?.data;
+
+   if (!InfoError) {
+      return (
+         &lt;div>
+            &lt;NavTop />
+            &lt;div className="main-container">
+               &lt;NavLeft />
+               &lt;div className="dash-container">
+                  &lt;div className="aside">
+                     &lt;div className="box">
+                        &lt;div className="box-img-cal">
+                           &lt;img src={Calorie} alt="img-Calorie" />
+                        &lt;/div>
+                        &lt;div className="box-text">
+                           &lt;h3>{apiCalorie}kCal&lt;/h3>
+                           &lt;p>Calories&lt;/p>
+                        &lt;/div>
+                     &lt;/div>
+                     &lt;div className="box">
+                        &lt;div className="box-img-prot">
+                           &lt;img src={Proteine} alt="img-Proteine" />
+                        &lt;/div>
+                        &lt;div className="box-text">
+                           &lt;h3>{apiProteine}kCal&lt;/h3>
+                           &lt;p>Proteines&lt;/p>
+                        &lt;/div>
+                     &lt;/div>
+                     &lt;div className="box">
+                        &lt;div className="box-img-glu">
+                           &lt;img src={Glucide} alt="img-Glucide" />
+                        &lt;/div>
+                        &lt;div className="box-text">
+                           &lt;h3>{apiGlucide}kCal&lt;/h3>
+                           &lt;p>Glucides&lt;/p>
+                        &lt;/div>
+                     &lt;/div>
+                     &lt;div className="box">
+                        &lt;div className="box-img-lip">
+                           &lt;img src={Lipide} alt="img-Lipide" />
+                        &lt;/div>
+                        &lt;div className="box-text">
+                           &lt;h3>{apiLipide}kCal&lt;/h3>
+                           &lt;p>Lipides&lt;/p>
+                        &lt;/div>
+                     &lt;/div>
+                  &lt;/div>
+                  &lt;h1>
+                     Bonjour &lt;span>{apiName}&lt;/span>
+                  &lt;/h1>
+                  &lt;p>Félicitation ! Vous avez explosé vos objectifs hier 👏&lt;/p>
+                  &lt;Activity currentUserActivity={activityApi} />
+                  &lt;div className="bottom-chart">
+                     {!activityLoading &amp;&amp; (
+                        &lt;AverageSessions currentUserAverageSessions={averageApi} />
+                     )}
+                     &lt;PerfChart currentUserPerf={perfApi} />
+                     &lt;ScoreChart currentUserScore={InfoUser?.data} />
+                  &lt;/div>
+               &lt;/div>
+            &lt;/div>
+         &lt;/div>
+      );
+   } else {
+      return &lt;Navigate to="*" />;
+   }
+}
+export default User;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#filterUser">filterUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Feb 09 2023 22:48:07 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+/* .radialChart {
+   position: relative;
+}
+
+.radialChart__title {
+   position: absolute;
+   left: 20px;
+   top: 20px;
+   z-index: 100;
+   font-weight: 500;
+   font-size: 15px;
+   line-height: 24px;
+   color: #20253a;
+}
+
+.radialChart__circle {
+   z-index: 250;
+   posi
+}
+
+.radialChart__item {
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 26px;
+   text-align: center;
+   color: #74798c;
+   position: absolute;
+   z-index: 300;
+   left: 30%;
+   top: 35px;
+   width: 95px;
+}
+
+.radialChart__item span {
+   font-weight: 700;
+   font-size: 26px;
+
+   text-align: center;
+
+   color: #282d30;
+} */
+
+.radialChart {
+   position: relative;
+}
+
+.radialChart-item {
+   position: absolute;
+   z-index: 10;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   max-width: 60px;
+   font-size: 16px;
+   color: #74798c;
+}
+.radialChart-item span {
+   color: #282d30;
+   font-size: 26px;
+}
+.radialChart-title {
+   position: absolute;
+   z-index: 10;
+   top: 20px;
+   left: 20px;
+   font-size: 15px;
+   font-weight: 500;
+}
