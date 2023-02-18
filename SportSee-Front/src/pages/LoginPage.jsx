@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import useFetch from "../utils/fetchData";
+
 import "../Style/LoginPage.css";
-import { USER_ACTIVITY, USER_MAIN_DATA } from "../datas/dataMock";
+import { USER_MAIN_DATA } from "../datas/dataMock";
 
 const LoginPage = () => {
    return (

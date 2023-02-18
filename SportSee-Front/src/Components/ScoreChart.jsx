@@ -1,5 +1,5 @@
 import React from "react";
-import { RadialBarChart, RadialBar, PolarAngleAxis } from "recharts";
+import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 import "../Style/ScoreChart.css";
 import PropTypes from "prop-types";
 
@@ -8,8 +8,8 @@ export default function ScoreChart({ currentUserScore }) {
       if (data?.todayScore) {
          data.score = data.todayScore;
          delete data.todayScore;
-         return data;
       }
+      return data;
    }
    formatScore(currentUserScore);
 
@@ -26,27 +26,21 @@ export default function ScoreChart({ currentUserScore }) {
             <span>{scorePercent}%</span> <br />
             de votre objectif
          </h6>
-         <RadialBarChart
-            width={220}
-            height={224}
-            data={formatScore(currentUserScore)}
-            style={{ backgroundColor: "#FBFBFB", borderRadius: "5px" }}
-            innerRadius="90%"
-            outerRadius={140}
-            barSize={10}
-            startAngle={180}
-            endAngle={-180}
-         >
-            <circle cx="50%" cy="50%" fill="white" r="75"></circle>
-            <RadialBar
-               minAngle={15}
-               dataKey="score"
-               fill="#FBFBFB"
-               cornerRadius={25}
+         <ResponsiveContainer width="100%" height="100%">
+            <RadialBarChart
+               data={[formatScore(currentUserScore), { score: 1, fill: "#FBFBFB" }]}
+               style={{ backgroundColor: "#FBFBFB", borderRadius: "5px" }}
+               innerRadius="90%"
+               outerRadius={140}
                barSize={10}
-            />
-            <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
-         </RadialBarChart>
+               startAngle={180}
+               endAngle={-180}
+            >
+               <RadialBar dataKey="score" fill="#FF0000" cornerRadius={25} />
+
+               <circle cx="50%" cy="50%" fill="white" r="75"></circle>
+            </RadialBarChart>
+         </ResponsiveContainer>
       </div>
    );
 }

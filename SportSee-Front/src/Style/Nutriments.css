@@ -1,0 +1,20 @@
+.box {
+   background: #fbfbfb;
+   height: 98px;
+   width: 258px;
+   border-radius: 5px;
+   display: flex;
+   align-items: center;
+}
+.box-img-cal img {
+   height: 60px;
+   padding: 0 20px;
+   width: auto;
+}
+
+@media screen and (max-width: 1281px) {
+   .box {
+      width: 210px;
+      height: 80px;
+   }
+}

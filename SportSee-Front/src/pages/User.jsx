@@ -8,16 +8,17 @@ import PerfChart from "../Components/PerfChart";
 import ScoreChart from "../Components/ScoreChart";
 import { useParams } from "react-router-dom";
 import useFetch from "../utils/fetchData";
-import Calorie from "../Assets/energy.svg";
-import Proteine from "../Assets/chicken.svg";
-import Glucide from "../Assets/apple.svg";
-import Lipide from "../Assets/cheeseburger.svg";
+import Calorie from "../Assets/calories-icon.png";
+import Proteine from "../Assets/protein-icon.png";
+import Glucide from "../Assets/carbs-icon.png";
+import Lipide from "../Assets/fat-icon.png";
 import {
    USER_MAIN_DATA,
    USER_ACTIVITY,
    USER_AVERAGE_SESSIONS,
    USER_PERFORMANCE,
 } from "../datas/dataMock";
+import Nutriment from "../Components/Nutriments";
 
 /**
  * Get datas equal to ID from mock
@@ -56,11 +57,7 @@ function User() {
    /**
     * User data
     */
-   const {
-      data: InfoUser,
-      loading: InfoLoading,
-      error: InfoError,
-   } = useFetch(`http://localhost:3000/user/${userId}`);
+   const { data: InfoUser, error: InfoError } = useFetch(`http://localhost:3000/user/${userId}`);
    const apiName = InfoUser?.data?.userInfos?.firstName;
    const apiCalorie = InfoUser?.data?.keyData.calorieCount;
    const apiProteine = InfoUser?.data?.keyData.proteinCount;
@@ -70,38 +67,26 @@ function User() {
    /**
     * Activity data
     */
-   const {
-      data: user,
-      loading: userLoading,
-      error: userError,
-   } = useFetch(`http://localhost:3000/user/${userId}`);
-   const {
-      data: userActivity,
-      loading: activityLoading,
-      error: activityError,
-   } = useFetch(`http://localhost:3000/user/${userId}/activity`);
+
+   const { data: userActivity, loading: activityLoading } = useFetch(
+      `http://localhost:3000/user/${userId}/activity`
+   );
    const activityApi = userActivity?.data;
 
    /**
     * Average sessions data
     */
 
-   const {
-      data: AverageSessionsData,
-      loading: averageSessionsLoading,
-      error: averageSessionsError,
-   } = useFetch(`http://localhost:3000/user/${userId}/average-sessions`);
+   const { data: AverageSessionsData } = useFetch(
+      `http://localhost:3000/user/${userId}/average-sessions`
+   );
    const averageApi = AverageSessionsData?.data;
 
    /**
     * Performance data
     */
 
-   const {
-      data: perfData,
-      loading: perfLoading,
-      error: perfError,
-   } = useFetch(`http://localhost:3000/user/${userId}/performance`);
+   const { data: perfData } = useFetch(`http://localhost:3000/user/${userId}/performance`);
    const perfApi = perfData?.data;
 
    if (!InfoError) {
@@ -112,42 +97,10 @@ function User() {
                <NavLeft />
                <div className="dash-container">
                   <div className="aside">
-                     <div className="box">
-                        <div className="box-img-cal">
-                           <img src={Calorie} alt="img-Calorie" />
-                        </div>
-                        <div className="box-text">
-                           <h3>{apiCalorie}kCal</h3>
-                           <p>Calories</p>
-                        </div>
-                     </div>
-                     <div className="box">
-                        <div className="box-img-prot">
-                           <img src={Proteine} alt="img-Proteine" />
-                        </div>
-                        <div className="box-text">
-                           <h3>{apiProteine}kCal</h3>
-                           <p>Proteines</p>
-                        </div>
-                     </div>
-                     <div className="box">
-                        <div className="box-img-glu">
-                           <img src={Glucide} alt="img-Glucide" />
-                        </div>
-                        <div className="box-text">
-                           <h3>{apiGlucide}kCal</h3>
-                           <p>Glucides</p>
-                        </div>
-                     </div>
-                     <div className="box">
-                        <div className="box-img-lip">
-                           <img src={Lipide} alt="img-Lipide" />
-                        </div>
-                        <div className="box-text">
-                           <h3>{apiLipide}kCal</h3>
-                           <p>Lipides</p>
-                        </div>
-                     </div>
+                     <Nutriment image={Calorie} element={apiCalorie} />
+                     <Nutriment image={Proteine} element={apiProteine} />
+                     <Nutriment image={Glucide} element={apiGlucide} />
+                     <Nutriment image={Lipide} element={apiLipide} />
                   </div>
                   <h1>
                      Bonjour <span>{apiName}</span>

@@ -1,13 +1,6 @@
 import React from "react";
 import "../Style/PerfChart.css";
-import {
-   Radar,
-   RadarChart,
-   PolarGrid,
-   PolarAngleAxis,
-   PolarRadiusAxis,
-   ResponsiveContainer,
-} from "recharts";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 
 export default function PerformanceChart({ currentUserPerf }) {
@@ -50,20 +43,18 @@ export default function PerformanceChart({ currentUserPerf }) {
    const dataReversed = reverseData(currentUserPerf?.data);
    return (
       <div className="perf-wrapper">
-         <ResponsiveContainer>
-            <RadarChart outerRadius={80} data={dataReversed}>
-               <PolarGrid radialLines={false} />
-               <PolarAngleAxis
-                  dataKey="kind"
-                  tickLine={false}
-                  tick={{ fontSize: 12, fontWeight: 500 }}
-                  stroke="#fff"
-                  tickFormatter={xAxisFormatter}
-               />
+         <RadarChart width={250} height={210} data={dataReversed}>
+            <PolarGrid radialLines={false} />
+            <PolarAngleAxis
+               dataKey="kind"
+               tickLine={false}
+               tick={{ fontSize: 12, fontWeight: 500 }}
+               stroke="#fff"
+               tickFormatter={xAxisFormatter}
+            />
 
-               <Radar dataKey="value" fill="#FF0101B2" />
-            </RadarChart>
-         </ResponsiveContainer>
+            <Radar dataKey="value" fill="#FF0101B2" />
+         </RadarChart>
       </div>
    );
 }

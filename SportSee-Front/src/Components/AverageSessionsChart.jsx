@@ -33,6 +33,7 @@ export default function AverageSessions({ currentUserAverageSessions }) {
    return (
       <div className="sessionDurationWrap">
          <h2>Durée moyenne des sessions</h2>
+
          <AreaChart
             width={250}
             height={200}
