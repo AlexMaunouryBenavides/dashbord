@@ -97,10 +97,10 @@ function User() {
                <NavLeft />
                <div className="dash-container">
                   <div className="aside">
-                     <Nutriment image={Calorie} element={apiCalorie} />
-                     <Nutriment image={Proteine} element={apiProteine} />
-                     <Nutriment image={Glucide} element={apiGlucide} />
-                     <Nutriment image={Lipide} element={apiLipide} />
+                     <Nutriment image={Calorie} element={apiCalorie} titre={"Calorie"} />
+                     <Nutriment image={Proteine} element={apiProteine} titre={"Proteine"} />
+                     <Nutriment image={Glucide} element={apiGlucide} titre={"Glucide"} />
+                     <Nutriment image={Lipide} element={apiLipide} titre={"Lipide"} />
                   </div>
                   <h1>
                      Bonjour <span>{apiName}</span>

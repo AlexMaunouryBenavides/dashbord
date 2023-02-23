@@ -1,7 +1,7 @@
 import "../Style/Nutriments.css";
 import PropTypes from "prop-types";
 
-function Nutriment({ image, element }) {
+function Nutriment({ image, element, titre }) {
    return (
       <div className="box">
          <div className="box-img-cal">
@@ -9,7 +9,7 @@ function Nutriment({ image, element }) {
          </div>
          <div className="box-text">
             <h3>{element}kCal</h3>
-            <p>Calories</p>
+            <p>{titre}</p>
          </div>
       </div>
    );
